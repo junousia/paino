@@ -51,7 +51,6 @@ function draw() {
 		height: 300,
 	    renderer: 'line',
 		interpolation: 'linear',
-		padding: {top: 0.01, left: 0.01, right: 0.01, bottom: 0.01},
 	    series: seriesData
 	} );
 

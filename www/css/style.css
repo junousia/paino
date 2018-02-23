@@ -1,84 +1,35 @@
-.sliderClass .google-visualization-controls-slider-horizontal {
-  display: block
-  white-space: nowrap
-}
-
-.paino {
-  display: block
-}
-
-.panel-body {
-  display: block;
-}
-
-/* graph */
-
-.rickshaw_graph {
-    position: relative;
-}
-.rickshaw_graph svg {
-    display: block;    
-    overflow: hidden;
-}
-
-/* ticks */
-
 .rickshaw_graph .x_tick {
   display: none;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 0px;
-    border-left: 1px dotted rgba(0, 0, 0, 0.2);
-    pointer-events: none;
 }
+
 .rickshaw_graph .x_tick .title {
   display: none;
-    position: absolute;
-    font-size: 12px;
-    font-family: Arial, sans-serif;
-    opacity: 0.5;
-    white-space: nowrap;
-    margin-left: 3px;
-    bottom: 1px;
 }
 
 .chart {
     display: inline-block;
-}
-.legend {
-    display: block;
-    position: absolute;
-    top: 30px;
-    right: 0px;
-}
-.legend_container {
-    position: absolute;
-    right: 0;
-    bottom: 26px;
-    width: 0;
 }
 .chart_container {
     float: left;
     position: relative;
 }
 
+.cont {
+    display: flex;
+}
+
 .y_axis {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 40px;
+  background-color: transparent;
+  width: 40px
 }
 
 .x_axis {
     position: relative;
-    left: 40px;
     height: 40px;
 }
 
 .chart {
     position: relative;
-    left: 40px;
 }
 
 #canvas svg {
@@ -86,17 +37,9 @@
 }
 
 #canvas-svg {
+  flex: 1;
   position: relative;
-  margin: 10px;
-}
-
-.legend {
-  float: left;
-}
-
-.legend text {
-  opacity: 0.5;
-  font-size: 12px;
+  background-color: transparent;
 }
 
 .yAxisLabel {
@@ -108,32 +51,4 @@
 .xAxisLabel {
   position: absolute;
   text-align: right;
-}
-
-.title_container {
-  width: 100%;
-}
-
-.title {
-  float: left;
-  font-size: 16px;
-  width: 100%;
-  text-align: center;
-  display: none;
-  font-weight: bold;
-}
-
-.filter {
-  display: none;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-}
-
-#canvas-svg ul.multiselect-container li a {
-  background-color: transparent;
-}
-
-#canvas-svg ul.multiselect-container li a:hover {
-  background-color: #ddd;
 }
