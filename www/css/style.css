@@ -32,12 +32,9 @@
     position: relative;
 }
 
-#canvas svg {
-  border: none;
-}
-
 #canvas-svg {
   flex: 1;
+  border: none;
   position: relative;
   background-color: transparent;
 }
