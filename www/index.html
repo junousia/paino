@@ -1,46 +1,48 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Paino</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rickshaw/1.6.4/rickshaw.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
-    <link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="http://underscorejs.org/underscore-min.js" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/rickshaw/1.6.4/rickshaw.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.10.0/d3-legend.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
-    <script type="text/javascript" src="/js/paino.js"></script>
-    <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-xl navbar-light bg-light">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <a class="navbar-brand" href="#">Painonseuranta</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="form-inline my-2 my-lg-0" action="https://docs.google.com/forms/d/158sxsXSIqEyC_pfVhz7TdKgKWp8ppBIXXYIvXDaHJQ0/formResponse" method="post">
-          <input type="number" name="entry.1845009733" min="65" max="85" step=".01" class="form-control mr-md-2" placeholder="kg" aria-label="Lisää paino">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Lähetä</button>
-        </form>
-      </div>
-    </nav>
-      <div class="cont container-fluid">
-        <div class="y_axis"></div>
-        <div class="table-responsive chart_container">
-          <div class="chart"></div>
-          <div class="x_axis"></div>
-          <div class="preview"></div>
+    <head>
+        <title>Paino</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rickshaw/1.6.4/rickshaw.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+        <link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script src="http://underscorejs.org/underscore-min.js" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/rickshaw/1.6.4/rickshaw.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.10.0/d3-legend.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+        <script type="text/javascript" src="/js/paino.js"></script>
+        <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-xl navbar-light bg-light">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <a class="navbar-brand" href="#">Painonseuranta</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="form-inline my-2 my-lg-0" action="https://docs.google.com/forms/d/158sxsXSIqEyC_pfVhz7TdKgKWp8ppBIXXYIvXDaHJQ0/formResponse" method="post">
+                    <input type="number" name="entry.1845009733" min="65" max="85" step=".01" class="form-control mr-md-2" placeholder="kg" aria-label="Lisää paino">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Lähetä</button>
+                </form>
+            </div>
+        </nav>
+        <div class="chart_container container-fluid">
+            <div class="chart">
+                <div class="chart-area"></div>
+            </div>
+            <div class="y_axis"></div>
+            <div class="x_axis"></div>
+            <div class="legend"></div>
+
+            <div class="preview"></div>
         </div>
-      </div>
-  </body>
+    </body>
 </html>

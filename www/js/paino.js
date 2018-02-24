@@ -1,81 +1,116 @@
-var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1v1gLW2FjISr9x1j-xnTwY1SEvwLOQoLJcocJJm2e25c/pubhtml';
+var public_spreadsheet_key = '1v1gLW2FjISr9x1j-xnTwY1SEvwLOQoLJcocJJm2e25c';
 
-var graph, xAxis, yAxis, axes, hoverDetail, preview, previewXAxis;
+var graph, xAxis, yAxis, axes, hoverDetail, preview, previewXAxis, legend, shelving, order, highlight;
 
-var seriesData;
+var series_data;
+
+var colors = ["red", "blue", "green", "purple", "cyan", "pink"]
+
+var date_options = { weekday: 'long', year: undefined, month: 'long', day: 'numeric' };
+var timeline_options = { weekday: undefined, year: undefined, month: 'numeric', day: 'numeric' };
 
 function get_data() {
     Tabletop.init(
         {
-            key: public_spreadsheet_url,
-            callback: updateData,
+            key: public_spreadsheet_key,
+            callback: update_data,
             simpleSheet: true,
-			postProcess: function(element) {
+            postProcess: function(element) {
                 // Convert string date into Date date
                 element['timestamp'] = Date.parse(element['timestamp']);
                 element['paino'] = parseFloat(element['paino']);
-				delete element['rowNumber'];
+                delete element['rowNumber'];
             }
         }
     )
 }
 
-function updateData(chartData) {
-  chartData.forEach(function(o) {
-    Object.defineProperty(o, 'y',
-        Object.getOwnPropertyDescriptor(o, 'Paino'));
-    delete o['Paino'];
-    Object.defineProperty(o, 'x',
-        Object.getOwnPropertyDescriptor(o, 'Timestamp'));
-    delete o['Timestamp'];
-  });
+function update_data(chart_data) {
+    var years = [];
 
-  seriesData = [
-      {
-		name: 'Paino',
-        color: 'steelblue',
-        data: chartData
-      }
-  ]
+    chart_data.forEach(function(o) {
+        Object.defineProperty(o, 'y',
+                              Object.getOwnPropertyDescriptor(o, 'Paino'));
+        delete o['Paino'];
+        Object.defineProperty(o, 'x',
+                              Object.getOwnPropertyDescriptor(o, 'Timestamp'));
+        delete o['Timestamp'];
+        var date = new Date(o.x);
+        if ( ! years.includes(date.getFullYear())) {
+            years.push(date.getFullYear())
+        }
+    });
 
-  draw()
+    var all_series = [];
+
+    years.forEach(function(o) {
+        all_series.push(
+            {
+                name: o.toString(),
+                data: chart_data.filter(function(x) {
+                    var date = new Date(x.x);
+                    var year = date.getFullYear();
+                    return year == o;
+                }),
+                color: colors.shift()
+            }
+        );
+    });
+
+    all_series.forEach(function(s) {
+        s['data'].forEach(function(y) {
+            var date = new Date(y.x);
+            date.setFullYear(1900);
+            y.x = date.valueOf();
+        });
+    });
+
+    console.log(all_series);
+
+    series_data = all_series;
+
+    draw()
 }
 
 $(window).on('load', function() {
-	get_data()
+    get_data()
 });
 
 function draw() {
     graph = new Rickshaw.Graph(
         {
             element: document.querySelector(".chart"),
-            min: "auto",
-            width: 2000,
+            min: 'auto',
+            width: 500,
             height: 300,
             renderer: 'line',
             interpolation: 'linear',
-            series: seriesData
+            series: series_data
         }
     );
 
-	graph.render();
+    graph.render();
 
-	hoverDetail = new Rickshaw.Graph.HoverDetail(
+
+    hoverDetail = new Rickshaw.Graph.HoverDetail(
         {
             graph: graph,
-            formatter: function(series, x, y) { return y + " kg" }
+            yFormatter: function(y) {
+                return y + " kg"
+            },
+            xFormatter: function(x) {
+                return new Date(x).toLocaleDateString("fi-FI", date_options);
+            }
         }
     );
 
     axes = new Rickshaw.Graph.Axis.Time(
         {
-            graph: graph,
-            pixelsPerTick: 50,
-            tickFormat: function(x) { return new Date(x).toLocaleDateString("fi-FI"); }
+            graph: graph
         }
     );
 
-	yAxis = new Rickshaw.Graph.Axis.Y(
+    yAxis = new Rickshaw.Graph.Axis.Y(
         {
             graph: graph,
             orientation: 'left',
@@ -84,28 +119,55 @@ function draw() {
         }
     );
 
+    legend = new Rickshaw.Graph.Legend(
+        {
+            graph: graph,
+            element: document.querySelector('.legend')
+        }
+    );
+
+    shelving = new Rickshaw.Graph.Behavior.Series.Toggle( {
+        graph: graph,
+        legend: legend
+    } );
+
+    order = new Rickshaw.Graph.Behavior.Series.Order( {
+        graph: graph,
+        legend: legend
+    } );
+
+    highlight = new Rickshaw.Graph.Behavior.Series.Highlight( {
+        graph: graph,
+        legend: legend
+    } );
+
     xAxis = new Rickshaw.Graph.Axis.X(
         {
             graph: graph,
             orientation: 'bottom',
+            width: 500,
             element: document.querySelector('.x_axis'),
             pixelsPerTick: 50,
-            tickFormat: function(x) { return new Date(x).toLocaleDateString("fi-FI"); }
+            timeUnit: Rickshaw.Fixtures.Time('month'),
+
+            tickFormat: function(x) {
+                return new Date(x).toLocaleDateString("fi-FI", timeline_options);
+            }
         }
     );
 
-	xAxis.render();
-	yAxis.render();
-	axes.render();
+    xAxis.render();
+    yAxis.render();
+    axes.render();
 
     var annotator = new Rickshaw.Graph.Annotate(
         {
             graph: graph,
-            element: document.querySelector('.preview')
-	   }
+            element: document.querySelector('.preview'),
+        }
     );
 
-	seriesData[0].data.forEach(
+    series_data[0].data.forEach(
         function(s) {
             if (s['Kommentti']) {
                 annotator.add(s['x'], s['y'] + ' kg: ' + s['Kommentti']);

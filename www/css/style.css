@@ -7,48 +7,57 @@
 }
 
 .rickshaw_graph .x_tick {
-  display: none;
+    display: none;
 }
 
 .rickshaw_graph .x_tick .title {
-  display: none;
+    display: none;
 }
 
 .chart {
     display: inline-block;
 }
-
+.legend {
+    display: block;
+    position: absolute;
+    top: 30px;
+    right: 0px;
+}
+.legend_container {
+    position: absolute;
+    right: 0;
+    bottom: 26px;
+    width: 0;
+}
 .chart_container {
     position: relative;
-    flex: 1;
-    position: relative;
-}
-
-.cont {
-    display: flex;
 }
 
 .y_axis {
-  background-color: transparent;
-  width: 40px
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40px;
 }
 
 .x_axis {
     position: relative;
+    left: 40px;
     height: 40px;
 }
 
 .chart {
     position: relative;
+    left: 40px;
 }
 
 .yAxisLabel {
-  position: absolute;
-  top: 0px;
-  left: 50px;
+    position: absolute;
+    top: 0px;
+    left: 50px;
 }
 
 .xAxisLabel {
-  position: absolute;
-  text-align: right;
+    position: absolute;
+    text-align: right;
 }
