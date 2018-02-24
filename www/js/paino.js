@@ -9,7 +9,11 @@ var series_data;
 var min_value = 10000.0;
 var max_value = 0.0;
 
-var colors = ["red", "blue", "green", "purple", "cyan", "pink"]
+var palette = new Rickshaw.Color.Palette(
+    {
+        scheme: 'colorwheel'
+    }
+);
 
 var date_options = { weekday: 'long', year: undefined, month: 'long', day: 'numeric' };
 var timeline_options = { weekday: undefined, year: undefined, month: 'numeric', day: 'numeric' };
@@ -70,7 +74,7 @@ function update_data(data, tabletop) {
 
     var all_series = [];
 
-    years.forEach(function(o) {
+    years.forEach(function(o, i, a) {
         all_series.push(
             {
                 name: o.toString(),
@@ -79,7 +83,7 @@ function update_data(data, tabletop) {
                     var year = date.getFullYear();
                     return year == o;
                 }),
-                color: colors.shift()
+                color: palette.color(i)
             }
 
         );
@@ -112,7 +116,7 @@ function draw() {
             document.querySelector(".y_axis").offsetWidth,
             height: 250,
             renderer: 'line',
-            interpolation: 'linear',
+            interpolation: 'basis',
             series: series_data
         }
     );
