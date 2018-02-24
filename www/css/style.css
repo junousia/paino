@@ -1,3 +1,11 @@
+.rickshaw_graph {
+    position: relative;
+}
+.rickshaw_graph svg {
+    display: block;
+    overflow: hidden;
+}
+
 .rickshaw_graph .x_tick {
   display: none;
 }
@@ -9,8 +17,10 @@
 .chart {
     display: inline-block;
 }
+
 .chart_container {
-    float: left;
+    position: relative;
+    flex: 1;
     position: relative;
 }
 
@@ -30,13 +40,6 @@
 
 .chart {
     position: relative;
-}
-
-#canvas-svg {
-  flex: 1;
-  border: none;
-  position: relative;
-  background-color: transparent;
 }
 
 .yAxisLabel {
