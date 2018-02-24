@@ -32,8 +32,21 @@ function get_data() {
 
 function update_data(data, tabletop) {
     var years = [];
-
+    console.log(tabletop)
     chart_data = tabletop.sheets("Tulokset").elements
+
+
+    if (tabletop.foundSheetNames.includes("Tietoja")) {
+        details = tabletop.sheets("Tietoja").elements[0]
+
+        for (var key in details) {
+            var x = document.createElement("LI");
+            var t = document.createTextNode(key + ": " + details[key]);
+            x.classList.add('list-group-item');
+            x.appendChild(t);
+            document.getElementById("details").appendChild(x);
+        }
+    }
 
     chart_data.forEach(function(o) {
         Object.defineProperty(o, 'y',
