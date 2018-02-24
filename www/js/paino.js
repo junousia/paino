@@ -1,6 +1,6 @@
 // 12XJcppnEunP7uNW_cD3eQjawNbXE0tmTqqqDDdxqdCo
 // 1v1gLW2FjISr9x1j-xnTwY1SEvwLOQoLJcocJJm2e25c
-var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1v1gLW2FjISr9x1j-xnTwY1SEvwLOQoLJcocJJm2e25c/pubhtml';
+var public_spreadsheet_key = '1v1gLW2FjISr9x1j-xnTwY1SEvwLOQoLJcocJJm2e25c';
 
 var graph, xAxis, yAxis, axes, hoverDetail, preview, previewXAxis, legend, shelving, order, highlight;
 
@@ -17,9 +17,9 @@ var timeline_options = { weekday: undefined, year: undefined, month: 'numeric', 
 function get_data() {
     Tabletop.init(
         {
-            key: public_spreadsheet_url,
+            key: public_spreadsheet_key,
             callback: update_data,
-            simpleSheet: true,
+            simpleSheet: false,
             postProcess: function(element) {
                 // Convert string date into Date date
                 element['timestamp'] = Date.parse(element['timestamp']);
@@ -30,8 +30,10 @@ function get_data() {
     )
 }
 
-function update_data(chart_data) {
+function update_data(data, tabletop) {
     var years = [];
+
+    chart_data = tabletop.sheets("Tulokset").elements
 
     chart_data.forEach(function(o) {
         Object.defineProperty(o, 'y',
