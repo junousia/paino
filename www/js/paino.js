@@ -1,6 +1,6 @@
-var public_spreadsheet_key = '1v1gLW2FjISr9x1j-xnTwY1SEvwLOQoLJcocJJm2e25c';
+var public_spreadsheet_key = '12XJcppnEunP7uNW_cD3eQjawNbXE0tmTqqqDDdxqdCo';
 var form_entry = 'entry.1845009733';
-var public_spreadsheet_form = 'https://docs.google.com/forms/d/e/1FAIpQLScsdt1GaiNoiX28-1mo0o65jJZ_6JvlUg1PDsZ9ZjjTYitQ8Q/formResponse';
+var public_spreadsheet_form = 'https://docs.google.com/forms/d/e/1FAIpQLSd1pAUWBeUOvX5h3yKysNkASwJbYTFVgH4UjJYHf_D0L1Foeg/formResponse';
 var graph, xAxis, yAxis, axes, hoverDetail, preview, previewXAxis, legend, shelving, order, highlight;
 
 var series_data;
