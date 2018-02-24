@@ -18,43 +18,40 @@
     display: inline-block;
 }
 .legend {
-    display: block;
-    position: absolute;
-    top: 30px;
-    right: 0px;
-}
-.legend_container {
-    position: absolute;
-    right: 0;
-    bottom: 26px;
-    width: 0;
+    display: inline-block;
+    float: right;
+    background-color: transparent;
+    color: black;
 }
 .chart_container {
     position: relative;
+    top: 20px;
 }
 
 .y_axis {
     position: absolute;
+    right: 0;
+    margin-right: 10px;
     top: 0;
     bottom: 0;
-    width: 40px;
+    width: 45px;
+    pointer-events: none;
 }
 
 .x_axis {
     position: relative;
-    left: 40px;
+    left: 0px;
     height: 40px;
 }
 
 .chart {
     position: relative;
-    left: 40px;
+    left: 0px;
 }
 
 .yAxisLabel {
     position: absolute;
     top: 0px;
-    left: 50px;
 }
 
 .xAxisLabel {

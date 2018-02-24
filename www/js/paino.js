@@ -1,8 +1,13 @@
-var public_spreadsheet_key = '1v1gLW2FjISr9x1j-xnTwY1SEvwLOQoLJcocJJm2e25c';
+// 12XJcppnEunP7uNW_cD3eQjawNbXE0tmTqqqDDdxqdCo
+// 1v1gLW2FjISr9x1j-xnTwY1SEvwLOQoLJcocJJm2e25c
+var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1v1gLW2FjISr9x1j-xnTwY1SEvwLOQoLJcocJJm2e25c/pubhtml';
 
 var graph, xAxis, yAxis, axes, hoverDetail, preview, previewXAxis, legend, shelving, order, highlight;
 
 var series_data;
+
+var min_value = 10000.0;
+var max_value = 0.0;
 
 var colors = ["red", "blue", "green", "purple", "cyan", "pink"]
 
@@ -12,7 +17,7 @@ var timeline_options = { weekday: undefined, year: undefined, month: 'numeric', 
 function get_data() {
     Tabletop.init(
         {
-            key: public_spreadsheet_key,
+            key: public_spreadsheet_url,
             callback: update_data,
             simpleSheet: true,
             postProcess: function(element) {
@@ -39,6 +44,13 @@ function update_data(chart_data) {
         if ( ! years.includes(date.getFullYear())) {
             years.push(date.getFullYear())
         }
+
+        if (o.y > max_value) {
+            max_value = o.y
+        }
+        if (o.y < min_value) {
+            min_value = o.y
+        }
     });
 
     var all_series = [];
@@ -54,6 +66,7 @@ function update_data(chart_data) {
                 }),
                 color: colors.shift()
             }
+
         );
     });
 
@@ -64,8 +77,6 @@ function update_data(chart_data) {
             y.x = date.valueOf();
         });
     });
-
-    console.log(all_series);
 
     series_data = all_series;
 
@@ -80,9 +91,10 @@ function draw() {
     graph = new Rickshaw.Graph(
         {
             element: document.querySelector(".chart"),
-            min: 'auto',
-            width: document.querySelector(".container-fluid").offsetWidth - 80,
-            height: 300,
+            min: min_value - 1,
+            max: max_value + 1,
+            width: document.querySelector(".container-fluid").offsetWidth - 40,
+            height: 250,
             renderer: 'line',
             interpolation: 'linear',
             series: series_data
@@ -114,6 +126,7 @@ function draw() {
         {
             graph: graph,
             orientation: 'left',
+            pixelsPerTick: 50,
             tickFormat: function(y) { return y + " kg" },
             element: document.querySelector('.y_axis')
         }
@@ -158,7 +171,7 @@ function draw() {
     xAxis.render();
     yAxis.render();
     axes.render();
-/*
+    /*
     var annotator = new Rickshaw.Graph.Annotate(
         {
             graph: graph,
@@ -178,10 +191,11 @@ function draw() {
 }
 
 var resize = function() {
-	graph.configure({
-		width: document.querySelector(".container-fluid").offsetWidth - 80,
-	});
-	graph.render();
+    graph.configure({
+        width: document.querySelector(".container-fluid").offsetWidth - 40,
+
+    });
+    graph.render();
 }
 
 window.addEventListener('resize', resize); 
