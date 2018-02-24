@@ -81,7 +81,7 @@ function draw() {
         {
             element: document.querySelector(".chart"),
             min: 'auto',
-            width: 500,
+            width: document.querySelector(".container-fluid").offsetWidth - 80,
             height: 300,
             renderer: 'line',
             interpolation: 'linear',
@@ -145,7 +145,6 @@ function draw() {
         {
             graph: graph,
             orientation: 'bottom',
-            width: 500,
             element: document.querySelector('.x_axis'),
             pixelsPerTick: 50,
             timeUnit: Rickshaw.Fixtures.Time('month'),
@@ -159,7 +158,7 @@ function draw() {
     xAxis.render();
     yAxis.render();
     axes.render();
-
+/*
     var annotator = new Rickshaw.Graph.Annotate(
         {
             graph: graph,
@@ -175,4 +174,15 @@ function draw() {
             }
         }
     );
+*/
 }
+
+var resize = function() {
+	graph.configure({
+		width: document.querySelector(".container-fluid").offsetWidth - 80,
+	});
+	graph.render();
+}
+
+window.addEventListener('resize', resize); 
+resize();
