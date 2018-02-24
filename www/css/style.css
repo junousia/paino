@@ -17,29 +17,33 @@
 .chart {
     display: inline-block;
 }
+
 .legend {
     display: inline-block;
     float: right;
-    background-color: transparent;
+    background-color: white;
     color: black;
+    z-index: 99 !important;
 }
+
 .chart_container {
     position: relative;
     top: 20px;
 }
 
 #details {
-    margin-top: 20px;
+    margin-top: 30px;
     margin-bottom: 20px;
-    width: 300px;
+    margin-left: 0px;
+    padding: 0px;
 }
 
 .y_axis {
     position: absolute;
-    right: 0;
-    margin-right: 10px;
-    top: 0;
-    bottom: 0;
+    right: 0px;
+    margin-right: 0px;
+    top: 0px;
+    bottom: 0px;
     width: 45px;
     pointer-events: none;
 }
@@ -53,6 +57,7 @@
 .chart {
     position: relative;
     left: 0px;
+    margin-right: 10px;
 }
 
 .yAxisLabel {

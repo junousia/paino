@@ -108,7 +108,8 @@ function draw() {
             element: document.querySelector(".chart"),
             min: min_value - 1,
             max: max_value + 1,
-            width: document.querySelector(".container-fluid").offsetWidth - 40,
+            width: document.querySelector(".container-fluid").offsetWidth - 
+            document.querySelector(".y_axis").offsetWidth,
             height: 250,
             renderer: 'line',
             interpolation: 'linear',
@@ -186,28 +187,12 @@ function draw() {
     xAxis.render();
     yAxis.render();
     axes.render();
-    /*
-    var annotator = new Rickshaw.Graph.Annotate(
-        {
-            graph: graph,
-            element: document.querySelector('.preview'),
-        }
-    );
-
-    series_data[0].data.forEach(
-        function(s) {
-            if (s['Kommentti']) {
-                annotator.add(s['x'], s['y'] + ' kg: ' + s['Kommentti']);
-                annotator.update();
-            }
-        }
-    );
-*/
 }
 
 var resize = function() {
     graph.configure({
-        width: document.querySelector(".container-fluid").offsetWidth - 40,
+        width: document.querySelector(".container-fluid").offsetWidth - 
+        document.querySelector(".y_axis").offsetWidth,
 
     });
     graph.render();
