@@ -20,8 +20,6 @@ var timeline_options = { weekday: undefined, year: undefined, month: 'numeric', 
 $(document).ready(function(e) {
     $("#success-alert").hide();
     $("#add-weight").submit(function(event){
-        // cancels the form submission
-        console.log(event)
         event.preventDefault();
         submitForm();
     });
@@ -50,7 +48,6 @@ $(document).ready(function(e) {
     }
 
     function formSuccess(){
-        console.log("setting values")
         $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
             $("#success-alert").alert('hide');
         });
