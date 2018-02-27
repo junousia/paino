@@ -1,7 +1,6 @@
-// 12XJcppnEunP7uNW_cD3eQjawNbXE0tmTqqqDDdxqdCo
-// 1v1gLW2FjISr9x1j-xnTwY1SEvwLOQoLJcocJJm2e25c
 var public_spreadsheet_key = '1v1gLW2FjISr9x1j-xnTwY1SEvwLOQoLJcocJJm2e25c';
-
+var form_entry = 'entry.1845009733';
+var public_spreadsheet_form = 'https://docs.google.com/forms/d/e/1FAIpQLScsdt1GaiNoiX28-1mo0o65jJZ_6JvlUg1PDsZ9ZjjTYitQ8Q/formResponse';
 var graph, xAxis, yAxis, axes, hoverDetail, preview, previewXAxis, legend, shelving, order, highlight;
 
 var series_data;
@@ -17,6 +16,48 @@ var palette = new Rickshaw.Color.Palette(
 
 var date_options = { weekday: 'long', year: undefined, month: 'long', day: 'numeric' };
 var timeline_options = { weekday: undefined, year: undefined, month: 'numeric', day: 'numeric' };
+
+$(document).ready(function(e) {
+    $("#success-alert").hide();
+    $("#add-weight").submit(function(event){
+        // cancels the form submission
+        console.log(event)
+        event.preventDefault();
+        submitForm();
+    });
+
+    function submitForm(){
+        // Initiate Variables With Form Content
+        var weight = $("#weight").val();
+        $("#weight").value = "";
+
+        $.ajax({
+            type: "POST",
+            url: public_spreadsheet_form,
+            data: form_entry + '=' + weight,
+            dataType: 'xml',
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('Accept', 'application/xml, text/xml, */*; q=0.01');
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8');
+            },
+            statusCode: {
+                0: function () {
+                    formSuccess();
+
+                }
+            }
+        });
+    }
+
+    function formSuccess(){
+        console.log("setting values")
+        $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+            $("#success-alert").alert('hide');
+        });
+        $(".collapse").collapse('hide')
+    }
+});
+
 
 function get_data() {
     Tabletop.init(
@@ -36,7 +77,7 @@ function get_data() {
 
 function update_data(data, tabletop) {
     var years = [];
-    console.log(tabletop)
+
     chart_data = tabletop.sheets("Tulokset").elements
 
 

@@ -27,14 +27,18 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <!--  action="https://docs.google.com/forms/d/e/1FAIpQLSd1pAUWBeUOvX5h3yKysNkASwJbYTFVgH4UjJYHf_D0L1Foeg/formResponse" method="post" -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="form-inline my-2 my-lg-0" action="https://docs.google.com/forms/d/158sxsXSIqEyC_pfVhz7TdKgKWp8ppBIXXYIvXDaHJQ0/formResponse" method="post">
-                    <input type="number" name="entry.1845009733" min="65" max="85" step=".01" class="form-control mr-md-2" placeholder="kg" aria-label="Lisää paino">
+                <form id="add-weight" class="form-inline my-2 my-lg-0">
+                    <input type="number" id="weight" min="50" max="85" step=".01" class="form-control mr-md-2" placeholder="kg" aria-label="Lisää paino">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Lähetä</button>
                 </form>
             </div>
         </nav>
         <div class="container-fluid">
+            <div id="success-alert" class="alert alert-dismissable alert-success" role="alert">
+                Paino lisätty
+            </div>
             <div class="chart_container container-fluid">
                 <div class="chart"></div>
                 <div class="y_axis"></div>
